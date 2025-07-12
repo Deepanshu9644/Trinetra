@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trinetra</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(177, 79, 206);
+        padding: 10px 20px;
+        color: black;
+      }
+      .navbar .logo {
+        font-size: 40px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 110px;
+      }
+      .navbar .menu {
+        display: flex;
+        gap: 15px;
+      }
+      .navbar .menu a {
+        color: black;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 5px 10px;
+      }
+      .navbar .user {
+        background-color: hsl(212, 88%, 53%);
+        padding: 15px 25px;
+        border-radius: 5px;
+        color: #ddd;
+        font-size: 15px;
+        margin-right: 100px;
+      }
+      .content {
+        text-align: center;
+        margin: 30px;
+      }
+      .content h1 {
+        color: white;
+        font-size: 40px;
+        margin-top: 10px;
+        background-color: hsl(211, 92%, 46%);
+        padding: 20px 30px;
+      }
+      .content select {
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 20px;
+
+        margin-left: 970px;
+      }
+      .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ddd;
+        padding: 20px;
+
+        background-color: #f9f9f9;
+      }
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #120fce;
+      }
+      thead tr {
+        background-color: #f1f1f1;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      .company table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #120fce;
+      }
+      thead tr {
+        background-color: #f1f1f1;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .center table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #120fce;
+      }
+      thead tr {
+        background-color: #f1f1f1;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .ipc table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #120fce;
+      }
+      thead tr {
+        background-color: #f1f1f1;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+    </style>
+
+    <script>
+      async function loadEmployees() {
+        const response = await fetch("/employes/emp");
+        const employes = await response.json();
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+        employes.forEach((EmployeeEntity) => {
+          const row = `
+                    <tr>
+                        <td>${EmployeeEntity.id}</td>
+                        <td>${EmployeeEntity.name}</td>
+                        <td>${EmployeeEntity.email}</td>
+                        <td>${EmployeeEntity.mobile}</td> 
+                        <td>${EmployeeEntity.role}</td> 
+                        <td>${EmployeeEntity.company}</td>  
+                        <td>${EmployeeEntity.status}</td> 
+                    </tr>
+                    `;
+          tableBody.innerHTML += row;
+        });
+      }
+      async function loadCompanies() {
+        const response = await fetch("/companies/c");
+        const companies = await response.json();
+        const tableBody = document.getElementById("CompanytableBody");
+        tableBody.innerHTML = "";
+        companies.forEach((Company) => {
+          const row = `
+                    <tr>
+                        <td>${Company.id}</td>
+                        <td>${Company.name}</td>
+                        <td>${Company.address}</td> 
+                        <td>${Company.manager}</td> 
+                        <td>${Company.status}</td> 
+                    </tr>
+                    `;
+          tableBody.innerHTML += row;
+        });
+      }
+      async function loadCom() {
+        const response = await fetch("/centers/c");
+        const companies = await response.json();
+        const tableBody = document.getElementById("CentertableBody");
+        tableBody.innerHTML = "";
+        companies.forEach((Center) => {
+          const row = `
+                    <tr>
+                        <td>${Center.id}</td>
+                        <td>${Center.name}</td>
+                        <td>${Center.address}</td> 
+                        <td>${Center.companyname}</td>  
+                        <td>${Center.status}</td> 
+                    </tr>
+                    `;
+          tableBody.innerHTML += row;
+        });
+      }
+
+      async function loadIPCs() {
+        const response = await fetch("/ipcs/p");
+        const companies = await response.json();
+        const tableBody = document.getElementById("IpctableBody");
+        tableBody.innerHTML = "";
+        companies.forEach((Ipc) => {
+        	  const row = `
+        	    <tr>
+        	      <td>${Ipc.id}</td>
+        	      <td>${Ipc.status}</td> 
+        	      <td>${Ipc.centername}</td> 
+        	    </tr>
+        	  `;
+        	  tableBody.innerHTML += row;
+        	});
+      }
+      
+      function filterTable() {
+        const searchInput = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const statusFilter = document
+          .getElementById("statusFilter")
+          .value.toLowerCase();
+        const table = document.getElementById("tableBody");
+        const rows = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+          const cells = rows[i].getElementsByTagName("td");
+          const name = cells[1]?.textContent.toLowerCase() || "";
+          const email = cells[2]?.textContent.toLowerCase() || "";
+          const mobile = cells[3]?.textContent.toLowerCase() || "";
+          const status = cells[6]?.textContent.toLowerCase() || "";
+
+          const matchesSearch =
+            name.includes(searchInput) ||
+            email.includes(searchInput) ||
+            mobile.includes(searchInput);
+          const matchesStatus = !statusFilter || status === statusFilter;
+
+          if (matchesSearch && matchesStatus) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
+
+      function addNewEmployee() {
+    	    document.getElementById("employeeFormContainer").style.display = "block";
+    	  }
+
+    	  // Hide the form and reset
+    	  function cancelEmployeeForm() {
+    	    document.getElementById("employeeFormContainer").style.display = "none";
+    	    document.getElementById("employeeForm").reset();
+    	    document.getElementById("resultMessage").innerText = "";
+    	  }
+
+    	  // Handle form submit
+    	  document.addEventListener("DOMContentLoaded", function () {
+    	    document.getElementById("employeeForm").addEventListener("submit", function (e) {
+    	      e.preventDefault();
+
+    	      const formData = new FormData(this);
+
+    	      fetch("/employes/add", {
+    	        method: "POST",
+    	        headers: {
+    	          "Content-Type": "application/x-www-form-urlencoded"
+    	        },
+    	        body: new URLSearchParams(formData)
+    	      })
+    	      .then(res => {
+    	        if (res.ok) {
+    	          document.getElementById("resultMessage").innerText = "✅ Employee added successfully!";
+    	          this.reset();
+    	        } else {
+    	          document.getElementById("resultMessage").innerText = "❌ Failed to add employee.";
+    	        }
+    	      })
+    	      .catch(err => {
+    	        document.getElementById("resultMessage").innerText = "⚠️ Error: " + err.message;
+    	      });
+    	    });
+    	  });
+      function showSection(section) {
+        document.querySelector(".content").style.display = "none";
+        document.querySelector(".filter").style.display = "none";
+        document.querySelector(".company").style.display = "none";
+        document.querySelector(".center").style.display = "none";
+        document.querySelector(".ipc").style.display = "none";
+
+        document.querySelector(section).style.display = "block";
+      }
+      function updateImage() {
+    	  const selected = document.getElementById("companySelect").value;
+          if (selected) {
+            // Dynamically update image using the static path
+            document.getElementById("centerImage").src = `/static/images/${selected}`;
+          }
+       }
+      window.onload = function () {
+    	  fetch('/companies/c') // Adjust URL based on your controller
+    	    .then(res => res.json())
+    	    .then(companies => {
+    	      const companySelect = document.getElementById("company");
+    	      companies.forEach(company => {
+    	        const option = document.createElement("option");
+    	        option.value = company.name;
+    	        option.text = company.name;
+    	        companySelect.add(option);
+    	      });
+    	    });
+    	};
+    </script>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="logo">Trinetra</div>
+      <div class="menu">
+        <a href="/dashboard" onclick="showSection('.Dashboard');">Dashboard</a>
+        <a href="#" onclick="showSection('.filter'); ">Manage Employee</a>
+          <a href="#" onclick="showSection('.company'); loadCompanies()"> Company</a>
+          
+          <a href="#" onclick="showSection('.ipc'); loadIPCs()">IPC</a>
+
+        <a href="/logout">Logout</a>
+      </div>
+    </div>
+
+    <div class="content">
+      <h1>Center Images</h1>
+	    <img id="centerImage" src="{{ url_for('static', filename='images/company1.jpg') }}" alt="Center Image" width="300" />
+	    <br />
+	    <select id="companySelect" onchange="updateImage()">
+	      <option value="">Select company</option>
+	      <option value="company1.jpg">Center 1</option>
+	      <option value="company2.jpg">Center 2</option>
+	    </select>
+    </div>
+
+    <div style="margin-top: 10px" class="filter">
+      <div
+        style="
+          text-align: center;
+          background-color: hsl(241, 89%, 58%);
+          padding: 10px 20px;
+          color: #ddd;
+        "
+      >
+        <h1>Manage Employee</h1>
+      </div>
+      <div style="color: black; font-weight: bold; margin-left: 140px">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, email, mobile"
+          onkeyup="filterTable()"
+        />
+
+        <select id="statusFilter" onchange="filterTable()">
+          <option value="">Select status</option>
+          <option value="Active">Active</option>
+          <option value="InActive">InActive</option>
+        </select>
+      </div>
+      <h2>
+        <div>
+          <button
+            style="
+              margin-left: 1097px;
+              background-color: blue;
+              color: #ddd;
+              padding: 4px 5px;
+            "
+            onclick="addNewEmployee()">Add New Employee </button>
+        </div>
+		<!-- Hidden Employee Form -->
+		<div id="employeeFormContainer" style="display: none; margin: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9;">
+		  <form id="employeeForm">
+		    <label>Name: <input type="text" name="name" required /></label><br><br>
+		    <label>Email: <input type="email" name="email" required /></label><br><br>
+		    <label>Mobile: <input type="text" name="mobile" required /></label><br><br>
+		    <label>Role:
+		      <select name="role" required>
+		         <option value="Employee">EMPLOYEE</option>
+		        <option value="Manager">MANAGER</option>e3
+		        <option value="Admin">ADMIN</option>
+		      </select>
+		    </label><br><br>
+		    <label for="company">Company:</label>
+			<select name="company" id="company" required>
+			  <option value="">-- Select Company --</option>
+			</select>
+			<br><br>
+		    
+		    <button type="submit" style="background-color: green; color: white;">Submit</button>
+		    <button type="button" onclick="cancelEmployeeForm()" style="background-color: red; color: white;">Cancel</button>
+		
+		    <div id="resultMessage" style="margin-top: 10px;"></div>
+		  </form>
+		</div>
+        
+        
+        <div style="margin-left: 135px">List of Employee</div>
+      </h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>MOBILE</th>
+            <th>ROLE</th>
+            <th>COMPANY</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tr th:each="employee : ${employees}">
+	        <td th:text="${employee.id}"></td>
+	        <td th:text="${employee.name}"></td>
+	        <td th:text="${employee.email}"></td>
+	        <td th:text="${employee.mobile}"></td>
+	        <td th:text="${employee.role}"></td>
+	        <td th:text="${employee.company}"></td>
+	        <td th:text="${employee.status}"></td>
+	    </tr>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 10px" class="company">
+      <div
+        style="
+          text-align: center;
+          background-color: hsl(241, 89%, 58%);
+          padding: 10px 20px;
+          color: #ddd;
+        "
+      >
+        <h1>Manage Company</h1>
+      </div>
+      <h2>
+        <div>
+          <button
+            style="
+              margin-left: 1097px;
+              background-color: blue;
+              color: #ddd;
+              padding: 8px 10px;
+            "
+            onclick="addNewCompany()"
+          >
+            Add New Company
+          </button>
+        </div>
+        <div style="margin-left: 135px; font-size: 30px">List of Company</div>
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>ADDRESS</th>
+             <th>MANAGER</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody id="CompanytableBody"></tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 10px" class="center">
+      <div
+        style="
+          text-align: center;
+          background-color: hsl(241, 89%, 58%);
+          padding: 10px 20px;
+          color: #ddd;
+        "
+      >
+        <h1>Manage Center</h1>
+      </div>
+      <h2>
+        <div>
+          <button
+            style="
+              margin-left: 1097px;
+              background-color: blue;
+              color: #ddd;
+              padding: 8px 10px;
+            "
+            onclick="addNewCenter()"
+          >
+            Add New Center
+          </button>
+        </div>
+        <div style="margin-left: 135px; font-size: 30px">List of Center</div>
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>ADDRESS</th>
+            <th>COMPANYNAME</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody id="CentertableBody"></tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 10px" class="ipc">
+      <div
+        style="
+          text-align: center;
+          background-color: hsl(241, 89%, 58%);
+          padding: 10px 20px;
+          color: #ddd;
+        "
+      >
+        <h1>Manage IPC</h1>
+      </div>
+      <h2>
+        <div>
+          <button
+            style="
+              margin-left: 1097px;
+              background-color: blue;
+              color: #ddd;
+              padding: 8px 10px;
+            "
+            onclick="addNewCenter()"
+          >
+            Add New IPC
+          </button>
+        </div>
+        <div style="margin-left: 135px; font-size: 30px">List of Ipc</div>
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>STATUS</th>
+            <th>CENTERNAME</th>
+          </tr>
+        </thead>
+        <tbody id="IpctableBody"></tbody>
+      </table>
+    </div>
+  </body>
+</html>
