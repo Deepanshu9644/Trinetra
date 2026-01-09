@@ -30,11 +30,7 @@ public class DashboardController {
 	@Autowired
 	private IpcRepository ipcRepository;
 	
-//	@GetMapping("/dashboard")
-//	public String sharedDashboard() {
-//	    return "Dashboard"; // refers to Dashboard.html in templates
-//	}
-	
+
 
 
 	@GetMapping("/dashboard")
@@ -52,53 +48,10 @@ public class DashboardController {
 	    
 	    return "Dashboard";
 	    
-//	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//	    for (GrantedAuthority authority : authentication.getAuthorities()) {
-//	        String role = authority.getAuthority();
-//	        if (role.equals("ROLE_ADMIN")) {
-//	            model.addAttribute("employees", employeeRepository.findAll());
-//	            model.addAttribute("companies", companyRepository.findAll());
-//	            model.addAttribute("ipcs", ipcRepository.findAll());
-//	            return "admin_dashboard";
-//	        } else if (role.equals("ROLE_MANAGER")) {
-//	            // You can customize the data shown to managers if needed
-//	            model.addAttribute("employees", employeeRepository.findAll());
-//	            model.addAttribute("companies", companyRepository.findAll());
-//	            model.addAttribute("ipcs", ipcRepository.findAll());
-//	            return "manager_dashboard";
-//	        }
-//	    }
-//	    return "access_denied";
+
 	}
 
 
-//    @GetMapping("/dashboard")
-//    public String getDashboard() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        for (GrantedAuthority authority : authentication.getAuthorities()) {
-//            String role = authority.getAuthority();
-//            if (role.equals("ROLE_ADMIN")) {
-//                return "redirect:/admin/dashboard";
-//            } else if (role.equals("ROLE_MANAGER")) {
-//                return "redirect:/manager/dashboard";
-//            }
-//        }
-//        return "access_denied"; // fallback if role doesn't match
-//    }
-//
-//    @GetMapping("/admin/dashboard")
-//    public String adminDashboard() {
-//        return "admin_dashboard";
-//    }
-//
-//    @GetMapping("/manager/dashboard")
-//    public String managerDashboard() {
-//        return "manager_dashboard";
-//    }
-//
-//    @GetMapping("/access-denied")
-//    public String accessDenied() {
-//        return "access_denied";
-//    }
+
 }
 
