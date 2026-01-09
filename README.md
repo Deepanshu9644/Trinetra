@@ -14,10 +14,9 @@
 - Java 17+
 - Spring Boot
 - Spring Data JPA
-- Hibernate
 - MySQL (or any compatible DB)
 - Maven
-- Jakarta Persistence (JPA)
+
 
 ---
 
